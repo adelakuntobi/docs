@@ -31548,64 +31548,6 @@
         ]
       }
     },
-    "": {
-      "get": {
-        "summary": "Health Check",
-        "responses": {
-          "200": {
-            "description": "Health Check (Success)",
-            "content": {
-              "application/json": {
-                "example": {
-                  "code": 200,
-                  "data": null,
-                  "message": "API is healthy"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": false,
-                  "code": 400,
-                  "message": "Failed to validate invoice",
-                  "data": null,
-                  "error": {
-                    "id": "5c4c008e-8f1e-4034-a96b-8b352c143da5",
-                    "handler": "invoice_actions",
-                    "details": "this business does not exist",
-                    "public_message": "validation failed"
-                  },
-                  "timestamp": "2025-12-23T14:54:12.477393Z"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "example": {
-                  "status": false,
-                  "code": 401,
-                  "message": "Unauthorized",
-                  "data": null,
-                  "error": {
-                    "details": "invalid or missing API credentials"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Invoices"
-        ]
-      }
-    },
     "/api/v1/einvoice/{IRN}": {
       "get": {
         "summary": "Get Each Invoice (Advanced)",
@@ -31662,6 +31604,64 @@
         ],
         "tags": [
           "Status and retrieval"
+        ]
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Health Check",
+        "responses": {
+          "200": {
+            "description": "Health Check (Success)",
+            "content": {
+              "application/json": {
+                "example": {
+                  "code": 200,
+                  "data": null,
+                  "message": "API is healthy"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": false,
+                  "code": 400,
+                  "message": "Failed to validate invoice",
+                  "data": null,
+                  "error": {
+                    "id": "5c4c008e-8f1e-4034-a96b-8b352c143da5",
+                    "handler": "invoice_actions",
+                    "details": "this business does not exist",
+                    "public_message": "validation failed"
+                  },
+                  "timestamp": "2025-12-23T14:54:12.477393Z"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": false,
+                  "code": 401,
+                  "message": "Unauthorized",
+                  "data": null,
+                  "error": {
+                    "details": "invalid or missing API credentials"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Invoices"
         ]
       }
     }
