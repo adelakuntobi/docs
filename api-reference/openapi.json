@@ -7,12 +7,12 @@
   },
   "servers": [
     {
-      "url": "https://api.pasca.co",
-      "description": "Production"
-    },
-    {
       "url": "https://test-api.pasca.co",
       "description": "Sandbox"
+    },
+    {
+      "url": "https://api.pasca.co",
+      "description": "Production"
     }
   ],
   "components": {
