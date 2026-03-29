@@ -1,0 +1,17 @@
+---
+title: "Status and validation"
+description: "Check invoice state and validate data"
+---
+
+## Validation
+
+Use schema validation to confirm your payload is compliant before signing. Use IRN validation to confirm IRN ownership and format.
+
+## Status checks
+
+- Lookup IRN status with `GET /api/v1/einvoice/lookup/{IRN}`.
+- Fetch invoice details with `GET /api/v1/einvoice/{IRN}` or the simplified view with `GET /api/v1/einvoice/{IRN}/simple`.
+
+## Updates
+
+Use `PATCH /api/v1/einvoice/update/{IRN}` to update payment status and reference data after issuance.

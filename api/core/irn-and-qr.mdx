@@ -1,0 +1,18 @@
+---
+title: "IRN and QR"
+description: "Validate IRNs and generate QR codes"
+---
+
+## IRN validation
+
+Use IRN validation to confirm an IRN belongs to the specified business and is structurally valid before you transmit or display it.
+
+## QR code generation
+
+PASCA can generate QR codes from a public key, certificate, and IRN. Use the QR output to embed verification data on invoices.
+
+## Typical flow
+
+1. Validate the IRN with `POST /api/v1/einvoice/irn/validate`.
+2. Generate a QR code with `POST /api/v1/einvoice/qr-code/create`.
+3. Validate a QR code with `POST /api/v1/einvoice/qr-code/validate`.

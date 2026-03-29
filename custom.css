@@ -1,0 +1,9 @@
+/* Hide Mintlify branding and powered-by footer elements */
+.mintlify-badge,
+.mintlify-watermark,
+.footer-powered-by,
+.powered-by,footer,
+a[href*="mintlify.com"],
+a[href*="www.mintlify.com"] {
+  display: none !important;
+}

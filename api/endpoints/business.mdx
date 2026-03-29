@@ -1,0 +1,60 @@
+---
+title: "Business and health"
+description: "Business lookup and service health"
+---
+
+## Get business information
+
+**POST** `{{BASE_URL}}/api/v1/einvoice/business/lookup`
+
+Returns business information for a given TIN.
+
+Request example:
+
+```json
+{
+  "tin": "32637045-0001"
+}
+```
+
+Response example:
+
+```json
+{
+  "code": 200,
+  "data": {
+    "id": "32e4a85e-253c-4baf-83f1-9f5f8822f6a2",
+    "status": "200 OK",
+    "message": "TIN Information",
+    "tin": "32637045-0001",
+    "taxpayer_name": "PASCA TECHNOLOGY LTD",
+    "address": "21, OGO OLUWA STREET BARIGA, SHOMOLU"
+  }
+}
+```
+
+Fields:
+
+- `tin`: Tax Identification Number.
+
+## Health check
+
+**GET** `{{BASE_URL}}/`
+
+Checks API availability.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/"
+```
+
+Response example:
+
+```json
+{
+  "code": 200,
+  "data": null,
+  "message": "API is healthy"
+}
+```

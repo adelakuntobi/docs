@@ -1,0 +1,111 @@
+---
+title: "IRN and QR"
+description: "IRN validation and QR code generation"
+---
+
+## Validate IRN
+
+**POST** `{{BASE_URL}}/api/v1/einvoice/irn/validate`
+
+Validates an IRN for the specified business.
+
+Request example:
+
+```json
+{
+  "irn": "TEST001-6244CC45-20250629",
+  "business_id": "{{BUSINESS_ID}}"
+}
+```
+
+Response example (success):
+
+```json
+{
+  "code": 200,
+  "data": {
+    "ok": true
+  }
+}
+```
+
+Response example (error):
+
+```json
+{
+  "code": 400,
+  "data": null,
+  "message": "error has occurred",
+  "error": {
+    "id": "fe9db3ab-8efa-4ddd-b7a5-47dc2a4e151a",
+    "handler": "invoice_actions",
+    "details": "irn validation failed for this business, refer to the template and try again",
+    "public_message": "irn validation failed"
+  }
+}
+```
+
+Fields:
+
+- `irn`: Invoice Reference Number to validate.
+- `business_id`: PASCA business identifier.
+
+## Create QR code
+
+**POST** `{{BASE_URL}}/api/v1/einvoice/qr-code/create`
+
+Generates a QR code for an IRN using your key material.
+
+Request example:
+
+```json
+{
+  "public_key": "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0tCg==",
+  "certificate": "bEF0V3FJbmo5cVZYbEdCblB4QVpjM3FESWNCS0pSa0MzSmJpUkpQWVVTST0=",
+  "irn": "ABDULAHI1253636373-088EDD1B-20250629"
+}
+```
+
+Response example:
+
+```json
+{
+  "status": true,
+  "code": 200,
+  "message": "QR Code generated successfully",
+  "data": {
+    "qr_code": "data:image/png;base64,aW52b2ljZS1xci1jb2Rl"
+  }
+}
+```
+
+Fields:
+
+- `public_key`: Base64-encoded public key.
+- `certificate`: Base64-encoded certificate.
+- `irn`: Invoice Reference Number.
+
+## Validate QR code
+
+**POST** `{{BASE_URL}}/api/v1/einvoice/qr-code/validate`
+
+Validates a QR code payload.
+
+Request example:
+
+```json
+{
+  "code": "data:image/png;base64,aW52b2ljZS1xci1jb2Rl"
+}
+```
+
+Response format:
+
+```json
+{
+  "status": true,
+  "code": 200,
+  "message": "QR Code validated successfully",
+  "data": {}
+}
+```

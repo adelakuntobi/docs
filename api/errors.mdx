@@ -1,0 +1,49 @@
+---
+title: "Error handling"
+description: "Understand PASCA error responses"
+---
+
+## Error response format
+
+PASCA returns structured error responses with a status indicator, code, and error details when available.
+
+Response example:
+
+```json
+{
+  "status": false,
+  "code": 400,
+  "message": "Failed to validate invoice",
+  "data": null,
+  "error": {
+    "id": "5c4c008e-8f1e-4034-a96b-8b352c143da5",
+    "handler": "invoice_actions",
+    "details": "this business does not exist",
+    "public_message": "validation failed"
+  },
+  "timestamp": "2025-12-23T14:54:12.477393Z"
+}
+```
+
+Fields:
+
+- `status`: Boolean indicator of success.
+- `code`: Numeric status code.
+- `message`: High level error summary.
+- `error`: Detailed error information when available.
+- `timestamp`: Time the error occurred.
+
+## Common errors
+
+- `400`: Invalid payload or failed validation.
+- `404`: Endpoint not found or invalid path.
+
+Example 404 response:
+
+```json
+{
+  "code": 404,
+  "data": null,
+  "message": "no route found for this path. kindly check your request and try again"
+}
+```

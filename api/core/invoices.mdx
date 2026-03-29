@@ -1,0 +1,25 @@
+---
+title: "Invoices"
+description: "Build, validate, and sign compliant invoices"
+---
+
+## Purpose
+
+Use the invoice endpoints to validate payloads, sign invoices, and retrieve stored invoices. PASCA expects a structured invoice document with supplier and customer parties, line items, totals, and tax information.
+
+## Recommended flow
+
+1. Validate the invoice payload with `POST /api/v1/einvoice/validate`.
+2. Sign the invoice with `POST /api/v1/einvoice/sign` to generate the IRN.
+3. Use the IRN for transmission, updates, and retrieval.
+
+## Key fields to prepare
+
+- `business_id`: PASCA business identifier.
+- `irn`: Your invoice reference number.
+- `invoice_type_code`: Invoice type from the resources endpoint.
+- `document_currency_code`: Invoice currency.
+- `accounting_supplier_party`: Supplier identity and address.
+- `accounting_customer_party`: Customer identity and address.
+- `invoice_line`: Line items with quantities and pricing.
+- `legal_monetary_total`: Summary totals.

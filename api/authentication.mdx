@@ -1,0 +1,29 @@
+---
+title: "Authentication"
+description: "Pass your PASCA credentials on every request"
+---
+
+## Required headers
+
+PASCA authenticates requests using API keys and secrets. The collection defines two header pairs, and each endpoint lists the exact headers it expects.
+
+- `API-KEY` and `API-SECRET`
+
+Include `Accept: application/json` unless the endpoint explicitly returns XML.
+
+## Example
+
+```bash
+curl -X GET "https://api.pasca.co/api/v1/einvoice/resources/currencies" \
+  -H "API-KEY: <your_api_key>" \
+  -H "API-SECRET: <your_api_secret>" \
+  -H "Accept: application/json"
+```
+
+## Environment variables
+
+- `BASE_URL`: Your PASCA API base URL
+- `API_KEY`: Your API key
+- `API_SECRET`: Your API secret
+- `BUSINESS_ID`: Your NRS business_id
+- `IRN`: An invoice reference number for testing

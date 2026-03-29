@@ -1,0 +1,289 @@
+---
+title: "Resources"
+description: "Reference data for invoices"
+---
+
+## Get currencies
+
+**GET** `{{BASE_URL}}/api/v1/einvoice/resources/currencies`
+
+Returns supported currencies for invoice documents.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/resources/currencies" \
+  -H "API-KEY: <your_api_key>" \
+  -H "API-SECRET: <your_api_secret>" \
+  -H "Accept: application/json"
+```
+
+Response example:
+
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "symbol": "$",
+      "name": "US Dollar",
+      "symbol_native": "$",
+      "decimal_digits": 2,
+      "rounding": 0,
+      "code": "USD",
+      "name_plural": "US dollars"
+    }
+  ]
+}
+```
+
+Fields:
+
+- `code`: HTTP-like status indicator.
+- `data`: List of currency objects.
+
+## Get invoice types
+
+**GET** `{{BASE_URL}}/api/v1/einvoice/resources/invoices-types`
+
+Returns supported invoice type codes. This endpoint can return XML or JSON depending on your `Accept` header.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/resources/invoices-types" \
+  -H "Accept: application/json"
+```
+
+Response example (JSON):
+
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "code": "380",
+      "value": "Credit Note"
+    },
+    {
+      "code": "381",
+      "value": "Commercial Invoice"
+    }
+  ]
+}
+```
+
+Fields:
+
+- `code`: Invoice type code.
+- `value`: Invoice type description.
+
+## Get payment means
+
+**GET** `{{BASE_URL}}/api/v1/einvoice/resources/payment-means`
+
+Returns supported payment means codes. This endpoint can return XML or JSON depending on your `Accept` header.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/resources/payment-means" \
+  -H "Accept: application/json"
+```
+
+Response example (JSON):
+
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "code": "10",
+      "value": "Cash"
+    },
+    {
+      "code": "20",
+      "value": "Cheque"
+    }
+  ]
+}
+```
+
+## Get tax categories
+
+**GET** `{{BASE_URL}}/api/v1/einvoice/resources/tax-categories`
+
+Returns supported tax categories.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/resources/tax-categories"
+```
+
+Response example:
+
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "code": "STANDARD_GST",
+      "value": "Standard Goods and Services Tax",
+      "percent": "Not Available"
+    }
+  ]
+}
+```
+
+## Get products
+
+**GET** `{{BASE_URL}}/api/v1/einvoice/resources/products`
+
+Returns product reference data using query filters.
+
+Query parameters:
+
+- `start`: Pagination offset.
+- `length`: Page size.
+- `hscode`: HS code filter.
+- `description`: Product description filter.
+- `product_category`: Product category filter.
+- `search`: Free-text search.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/resources/products?start=1&length=10&hscode=0101.21&description=Horses%3B%20live%2C%20pure-bred%20breeding%20animals&product_category=Food%20and%20Beverages&search=Food"
+```
+
+Response example:
+
+```json
+{
+  "draw": 0,
+  "recordsTotal": 5612,
+  "recordsFiltered": 5612,
+  "data": [
+    {
+      "hscode": "0101.21",
+      "description": "Horses; live, pure-bred breeding animals"
+    }
+  ]
+}
+```
+
+## Get services
+
+**GET** `{{BASE_URL}}/api/v1/einvoice/resources/services`
+
+Returns service reference data using query filters.
+
+Query parameters:
+
+- `start`: Pagination offset.
+- `length`: Page size.
+- `code`: Service code filter.
+- `description`: Service description filter.
+- `search`: Free-text search.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/resources/services?start=1&length=10&code=01011&description=Horses%3B%20live%2C%20pure-bred%20breeding%20animals&search=Consultanting"
+```
+
+Response example:
+
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "description": "Growing of cereals (except rice), leguminous crops and oil seeds",
+      "code": "0111"
+    }
+  ]
+}
+```
+
+## Get local governments
+
+**GET** `{{BASE_URL}}/api/v1/einvoice/resources/lgas`
+
+Returns local government areas with state codes.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/resources/lgas"
+```
+
+Response example:
+
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "name": "Aba North",
+      "code": "NG-AB-ANO",
+      "state_code": "NG-AB"
+    }
+  ]
+}
+```
+
+## Get states
+
+**GET** `{{BASE_URL}}/api/v1/einvoice/resources/states`
+
+Returns Nigerian state codes.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/resources/states"
+```
+
+Response example:
+
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "name": "Abia",
+      "code": "NG-AB"
+    }
+  ]
+}
+```
+
+## Get units of measurement
+
+**GET** `{{BASE_URL}}/api/v1/einvoice/resources/units-of-measurement`
+
+Returns supported units of measurement.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/resources/units-of-measurement" \
+  -H "Accept: application/json"
+```
+
+Response example:
+
+```json
+{
+  "status": true,
+  "message": "Units fetched successfully",
+  "data": [
+    {
+      "code": "bag",
+      "name": "Bag"
+    }
+  ]
+}
+```

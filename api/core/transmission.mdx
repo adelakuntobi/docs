@@ -1,0 +1,17 @@
+---
+title: "Transmission"
+description: "Send signed invoices to NRS"
+---
+
+## Purpose
+
+Transmission sends a signed invoice to NRS for fiscalization. Use this step after you sign or after you sign and transmit in a single call.
+
+## Options
+
+- `POST /api/v1/einvoice/sign-transmit` signs and transmits in one request.
+- `GET /api/v1/einvoice/transmit/{IRN}` transmits a previously signed invoice.
+
+## After transmission
+
+Use lookup and invoice retrieval endpoints to confirm status and access the stored record.

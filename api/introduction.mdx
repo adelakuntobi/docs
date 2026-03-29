@@ -1,0 +1,32 @@
+---
+title: "Introduction"
+description: "PASCA eInvoicing concepts and core flows"
+---
+
+## Core concepts
+
+PASCA uses a few key concepts throughout the API.
+
+- Invoice Reference Number (IRN): A unique identifier for each invoice. You use it to sign, transmit, and retrieve invoices.
+- Fiscalization: The process of transmitting a signed invoice to NRS for compliance validation.
+- Websign: PASCA signing workflow that produces a signed invoice and IRN.
+
+## Typical flow
+
+1. Validate your invoice payload.
+2. Sign the invoice to generate an IRN.
+3. Transmit the signed invoice for fiscalization.
+4. Check status or retrieve the invoice as needed.
+
+## Base URL
+
+Use the environment that matches your workflow.
+
+- Production: `https://api.pasca.co`
+- Sandbox: `https://test-api.pasca.co`
+
+All examples use `{{BASE_URL}}` as a placeholder for your assigned environment.
+
+## Test in Postman
+
+You can explore and test the PASCA API in Postman using the published collection: [PASCA API collection](https://documenter.getpostman.com/view/41657148/2sB2qXm3gP).

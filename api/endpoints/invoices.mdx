@@ -1,0 +1,509 @@
+---
+title: "Invoices"
+description: "Validate, sign, transmit, and manage invoices"
+---
+
+## Validate invoice schema
+
+**POST** `{{BASE_URL}}/api/v1/einvoice/validate`
+
+Validates your invoice payload before signing. Use this to catch schema and compliance issues early.
+
+Request example:
+
+```json
+{
+  "business_id": "{{BUSINESS_ID}}",
+  "irn": "{{IRN}}",
+  "issue_date": "2024-05-14",
+  "due_date": "2024-06-14",
+  "issue_time": "17:59:04",
+  "invoice_type_code": "381",
+  "invoice_kind": "B2B",
+  "payment_status": "PENDING",
+  "note": "Invoice note",
+  "tax_point_date": "2024-05-14",
+  "document_currency_code": "NGN",
+  "tax_currency_code": "NGN",
+  "accounting_supplier_party": {
+    "party_name": "TITAN BRIDGE DYNAMIC WORLD LTD",
+    "tin": "24058123-0002",
+    "email": "test_sender@pasca.co",
+    "telephone": "+23480254099000",
+    "business_description": "Business description",
+    "postal_address": {
+      "street_name": "32, Owonikoko Street",
+      "city_name": "Gwarikpa",
+      "postal_zone": "023401",
+      "lga": "NG-AB-ANO",
+      "state": "NG-AB",
+      "country": "NG"
+    }
+  },
+  "accounting_customer_party": {
+    "party_name": "Dangote Group",
+    "tin": "72382732-0001",
+    "email": "business@email.com",
+    "telephone": "+23480254000000",
+    "business_description": "Sales of cement and building materials",
+    "postal_address": {
+      "street_name": "32, Owonikoko Street",
+      "city_name": "Gwarikpa",
+      "postal_zone": "023401",
+      "lga": "NG-AB-ANO",
+      "state": "NG-AB",
+      "country": "NG"
+    }
+  },
+  "payment_means": [
+    {
+      "payment_means_code": "10",
+      "payment_due_date": "2024-05-14"
+    }
+  ],
+  "tax_total": [
+    {
+      "tax_amount": 56.07,
+      "tax_subtotal": [
+        {
+          "taxable_amount": 800,
+          "tax_amount": 8,
+          "tax_category": {
+            "id": "LOCAL_SALES_TAX",
+            "percent": 2.3
+          }
+        }
+      ]
+    }
+  ],
+  "legal_monetary_total": {
+    "line_extension_amount": 10,
+    "tax_exclusive_amount": 10,
+    "tax_inclusive_amount": 10,
+    "payable_amount": 10
+  },
+  "invoice_line": [
+    {
+      "hsn_code": "CC-111",
+      "product_category": "Food and Beverages",
+      "discount_rate": 2.01,
+      "discount_amount": 3500,
+      "fee_rate": 1.01,
+      "fee_amount": 50,
+      "invoiced_quantity": 15,
+      "line_extension_amount": 30,
+      "item": {
+        "name": "Tomato Paste",
+        "description": "Description of the tomato paste",
+        "sellers_item_identification": "Spoon"
+      },
+      "price": {
+        "price_amount": 1150,
+        "base_quantity": 1,
+        "price_unit": "NGN per 1"
+      }
+    }
+  ]
+}
+```
+
+Response example (success):
+
+```json
+{
+  "status": true,
+  "code": 200,
+  "message": "Invoice validated sucessfully",
+  "data": []
+}
+```
+
+Response example (error):
+
+```json
+{
+  "status": false,
+  "code": 400,
+  "message": "Failed to validate invoice",
+  "data": null,
+  "error": {
+    "id": "5c4c008e-8f1e-4034-a96b-8b352c143da5",
+    "handler": "invoice_actions",
+    "details": "this business does not exist",
+    "public_message": "validation failed"
+  }
+}
+```
+
+Fields:
+
+- `business_id`: PASCA business identifier.
+- `irn`: Invoice Reference Number.
+- `invoice_type_code`: Invoice type code from resources.
+- `invoice_kind`: Invoice type such as B2B.
+- `accounting_supplier_party`: Supplier identity and address.
+- `accounting_customer_party`: Customer identity and address.
+- `invoice_line`: Line items for products or services.
+- `legal_monetary_total`: Invoice totals.
+
+## Sign invoice
+
+**POST** `{{BASE_URL}}/api/v1/einvoice/sign`
+
+Signs an invoice and generates an IRN. Use this after validation.
+
+Request example:
+
+```json
+{
+  "business_id": "{{BUSINESS_ID}}",
+  "irn": "{{IRN}}",
+  "issue_date": "2024-05-14",
+  "invoice_type_code": "396",
+  "document_currency_code": "NGN",
+  "tax_currency_code": "NGN",
+  "invoice_kind": "B2B",
+  "accounting_customer_party": {
+    "party_name": "Test Accounting Customer Party",
+    "tin": "83526544-2627",
+    "email": "test_sender@pasca.co",
+    "telephone": "+23480254099000",
+    "business_description": "Sample business description",
+    "postal_address": {
+      "street_name": "32, Owonikoko Street",
+      "city_name": "Gwarikpa",
+      "postal_zone": "023401",
+      "lga": "NG-AB-ANO",
+      "state": "NG-AB",
+      "country": "NG"
+    }
+  },
+  "accounting_supplier_party": {
+    "party_name": "Dangote Group",
+    "tin": "33824622-7135",
+    "email": "tobi@pasca.co",
+    "telephone": "+2348168527167",
+    "business_description": "Supplier details",
+    "postal_address": {
+      "street_name": "32, Owonikoko Street",
+      "city_name": "Gwarikpa",
+      "postal_zone": "023401",
+      "lga": "NG-AB-ANO",
+      "state": "NG-AB",
+      "country": "NG"
+    }
+  },
+  "legal_monetary_total": {
+    "line_extension_amount": 340.5,
+    "tax_exclusive_amount": 400,
+    "tax_inclusive_amount": 430,
+    "payable_amount": 1500000
+  },
+  "invoice_line": [
+    {
+      "hsn_code": "CC-001",
+      "product_category": "Food and Beverages",
+      "discount_rate": 2.01,
+      "discount_amount": 3500,
+      "fee_rate": 1.01,
+      "fee_amount": 50,
+      "invoiced_quantity": 15,
+      "line_extension_amount": 30,
+      "item": {
+        "name": "Tomato Paste",
+        "description": "Description of the tomato paste",
+        "sellers_item_identification": "Spoon"
+      },
+      "price": {
+        "price_amount": 1150,
+        "base_quantity": 1,
+        "price_unit": "NGN per 1"
+      }
+    }
+  ]
+}
+```
+
+Response example (success):
+
+```json
+{
+  "status": true,
+  "code": 200,
+  "message": "Invoice signed successfully",
+  "data": []
+}
+```
+
+Response example (error):
+
+```json
+{
+  "status": false,
+  "code": 400,
+  "message": "IRN already exists.",
+  "data": null,
+  "error": [],
+  "timestamp": "2025-09-23T11:09:04.747826Z"
+}
+```
+
+## Sign and transmit invoice
+
+**POST** `{{BASE_URL}}/api/v1/einvoice/sign-transmit`
+
+Signs and transmits an invoice to NRS in a single request.
+
+Request example:
+
+```json
+{
+  "business_id": "{{BUSINESS_ID}}",
+  "irn": "{{IRN}}",
+  "issue_date": "2024-05-14",
+  "invoice_type_code": "396",
+  "document_currency_code": "NGN",
+  "tax_currency_code": "NGN",
+  "invoice_kind": "B2B",
+  "accounting_customer_party": {
+    "party_name": "TITAN BRIDGE DYNAMIC WORLD LTD",
+    "tin": "83526544-2627",
+    "email": "test_sender@pasca.co",
+    "telephone": "+23480254099000",
+    "business_description": "Business description",
+    "postal_address": {
+      "street_name": "32, Owonikoko Street",
+      "city_name": "Gwarikpa",
+      "postal_zone": "023401",
+      "lga": "NG-AB-ANO",
+      "state": "NG-AB",
+      "country": "NG"
+    }
+  },
+  "accounting_supplier_party": {
+    "party_name": "Dangote Group",
+    "tin": "33824622-7135",
+    "email": "tobi@pasca.co",
+    "telephone": "+2348168527167",
+    "business_description": "Supplier details",
+    "postal_address": {
+      "street_name": "32, Owonikoko Street",
+      "city_name": "Gwarikpa",
+      "postal_zone": "023401",
+      "lga": "NG-AB-ANO",
+      "state": "NG-AB",
+      "country": "NG"
+    }
+  },
+  "legal_monetary_total": {
+    "line_extension_amount": 340.5,
+    "tax_exclusive_amount": 400,
+    "tax_inclusive_amount": 430,
+    "payable_amount": 1500000
+  },
+  "invoice_line": [
+    {
+      "hsn_code": "CC-001",
+      "product_category": "Food and Beverages",
+      "discount_rate": 2.01,
+      "discount_amount": 3500,
+      "fee_rate": 1.01,
+      "fee_amount": 50,
+      "invoiced_quantity": 15,
+      "line_extension_amount": 30,
+      "item": {
+        "name": "Tomato Paste",
+        "description": "Description of the tomato paste",
+        "sellers_item_identification": "Spoon"
+      },
+      "price": {
+        "price_amount": 1150,
+        "base_quantity": 1,
+        "price_unit": "NGN per 1"
+      }
+    }
+  ]
+}
+```
+
+Response example (success):
+
+```json
+{
+  "status": true,
+  "code": 200,
+  "message": "Invoice transmitted successfully!",
+  "data": []
+}
+```
+
+## Transmit invoice
+
+**GET** `{{BASE_URL}}/api/v1/einvoice/transmit/{IRN}`
+
+Transmits a previously signed invoice using its IRN.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/transmit/{{IRN}}" \
+  -H "API-KEY: <your_api_key>" \
+  -H "API-SECRET: <your_api_secret>" \
+  -H "Accept: application/json"
+```
+
+Response format:
+
+```json
+{
+  "status": true,
+  "code": 200,
+  "message": "Invoice transmitted successfully",
+  "data": []
+}
+```
+
+## Get invoice (simple)
+
+**GET** `{{BASE_URL}}/api/v1/einvoice/{IRN}/simple`
+
+Returns a simplified view of a stored invoice.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/{{IRN}}/simple" \
+  -H "API-KEY: <your_api_key>" \
+  -H "API-SECRET: <your_api_secret>" \
+  -H "Accept: application/json"
+```
+
+Response format:
+
+```json
+{
+  "status": true,
+  "code": 200,
+  "message": "Invoice fetched successfully",
+  "data": {}
+}
+```
+
+## Get invoice (advanced)
+
+**GET** `{{BASE_URL}}/api/v1/einvoice/{IRN}`
+
+Returns the full invoice record with all metadata.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/{{IRN}}" \
+  -H "API-KEY: <your_api_key>" \
+  -H "API-SECRET: <your_api_secret>" \
+  -H "Accept: application/json"
+```
+
+Response format:
+
+```json
+{
+  "status": true,
+  "code": 200,
+  "message": "Invoice fetched successfully",
+  "data": {}
+}
+```
+
+## Lookup IRN status
+
+**GET** `{{BASE_URL}}/api/v1/einvoice/lookup/{IRN}`
+
+Returns fiscalization status for an IRN.
+
+Request example:
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/lookup/{{IRN}}" \
+  -H "API-KEY: <your_api_key>" \
+  -H "API-SECRET: <your_api_secret>" \
+  -H "Accept: application/json"
+```
+
+Response format:
+
+```json
+{
+  "status": true,
+  "code": 200,
+  "message": "Lookup completed",
+  "data": {}
+}
+```
+
+## Update invoice
+
+**PATCH** `{{BASE_URL}}/api/v1/einvoice/update/{IRN}`
+
+Updates the payment status or reference for a stored invoice.
+
+Request example:
+
+```json
+{
+  "payment_status": "REJECTED",
+  "reference": "payment_reference_or_note"
+}
+```
+
+Response format:
+
+```json
+{
+  "status": true,
+  "code": 200,
+  "message": "Invoice updated successfully",
+  "data": []
+}
+```
+
+Fields:
+
+- `payment_status`: One of `PENDING`, `PAID`, or `REJECTED`.
+- `reference`: Optional payment reference or note.
+
+## Report e-invoice
+
+**POST** `{{BASE_URL}}/api/v1/einvoice/report-fiscalization`
+
+Reports a fiscalized invoice and its tax details.
+
+Request example:
+
+```json
+{
+  "agent_tin": "29039239-0001",
+  "base_amount": "1000",
+  "beneficiary_tin": "29334238-0001",
+  "currency": "NGN",
+  "item_description": "Items",
+  "irn": "{{IRN}}",
+  "other_taxes": "5000",
+  "total_amount": "112500",
+  "transaction_date": "2024-11-18",
+  "vat_calculated": "7500",
+  "vat_rate": "7.5",
+  "vat_status": "STANDARD_VAT"
+}
+```
+
+Response format:
+
+```json
+{
+  "status": true,
+  "code": 200,
+  "message": "Report submitted successfully",
+  "data": []
+}
+```
