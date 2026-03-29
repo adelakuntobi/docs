@@ -20,12 +20,12 @@
       "ApiKey": {
         "type": "apiKey",
         "in": "header",
-        "name": "api-key"
+        "name": "API-KEY"
       },
       "ApiSecret": {
         "type": "apiKey",
         "in": "header",
-        "name": "x-api-secret"
+        "name": "API-SECRET"
       },
       "APIKey": {
         "type": "apiKey",
