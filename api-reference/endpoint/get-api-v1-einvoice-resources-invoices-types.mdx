@@ -1,0 +1,140 @@
+---
+title: "Get Invoice Types"
+description: "GET /api/v1/einvoice/resources/invoices-types"
+openapi: "GET /api/v1/einvoice/resources/invoices-types"
+---
+
+**GET** `/api/v1/einvoice/resources/invoices-types`
+
+## Request example
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/resources/invoices-types" \
+  -H "API-KEY: <your_api_key>" \
+  -H "API-SECRET: <your_api_secret>" \
+  -H "Accept: application/json"
+```
+
+## Response examples
+
+**200**
+
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "code": "380",
+      "value": "Credit Note"
+    },
+    {
+      "code": "381",
+      "value": "Commercial Invoice"
+    },
+    {
+      "code": "384",
+      "value": "Debit Note"
+    },
+    {
+      "code": "385",
+      "value": "Self Billed Invoice"
+    },
+    {
+      "code": "386",
+      "value": "Factored Invoice"
+    },
+    {
+      "code": "388",
+      "value": "Statement of Account"
+    },
+    {
+      "code": "389",
+      "value": "Purchase Order"
+    },
+    {
+      "code": "390",
+      "value": "Proforma Invoice"
+    },
+    {
+      "code": "392",
+      "value": "Consignment Invoice"
+    },
+    {
+      "code": "393",
+      "value": "Self-billed Credit Note"
+    },
+    {
+      "code": "394",
+      "value": "Self-billed Invoice"
+    },
+    {
+      "code": "395",
+      "value": "Credit Note Request"
+    },
+    {
+      "code": "396",
+      "value": "Invoice Request"
+    },
+    {
+      "code": "397",
+      "value": "Final Settlement"
+    },
+    {
+      "code": "399",
+      "value": "Bill of Lading"
+    },
+    {
+      "code": "400",
+      "value": "Waybill"
+    },
+    {
+      "code": "402",
+      "value": "Shipping Instructions"
+    },
+    {
+      "code": "404",
+      "value": "Certificate of Origin"
+    },
+    {
+      "code": "406",
+      "value": "Customs Declaration"
+    },
+    {
+      "code": "408",
+      "value": "Packing List"
+    }
+  ]
+}
+```
+
+**400**
+
+```json
+{
+  "status": false,
+  "code": 400,
+  "message": "Failed to validate invoice",
+  "data": null,
+  "error": {
+    "id": "5c4c008e-8f1e-4034-a96b-8b352c143da5",
+    "handler": "invoice_actions",
+    "details": "this business does not exist",
+    "public_message": "validation failed"
+  },
+  "timestamp": "2025-12-23T14:54:12.477393Z"
+}
+```
+
+**401**
+
+```json
+{
+  "status": false,
+  "code": 401,
+  "message": "Unauthorized",
+  "data": null,
+  "error": {
+    "details": "invalid or missing API credentials"
+  }
+}
+```

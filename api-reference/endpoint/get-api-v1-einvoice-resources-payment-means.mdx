@@ -1,0 +1,108 @@
+---
+title: "Get Payment Means"
+description: "GET /api/v1/einvoice/resources/payment-means"
+openapi: "GET /api/v1/einvoice/resources/payment-means"
+---
+
+**GET** `/api/v1/einvoice/resources/payment-means`
+
+## Request example
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/resources/payment-means" \
+  -H "API-KEY: <your_api_key>" \
+  -H "API-SECRET: <your_api_secret>" \
+  -H "Accept: application/json"
+```
+
+## Response examples
+
+**200**
+
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "code": "10",
+      "value": "Cash"
+    },
+    {
+      "code": "20",
+      "value": "Cheque"
+    },
+    {
+      "code": "30",
+      "value": "Credit Transfer"
+    },
+    {
+      "code": "31",
+      "value": "Debit Transfer"
+    },
+    {
+      "code": "42",
+      "value": "ACH Credit"
+    },
+    {
+      "code": "43",
+      "value": "ACH Debit"
+    },
+    {
+      "code": "48",
+      "value": "Bank Card"
+    },
+    {
+      "code": "49",
+      "value": "Direct Debit"
+    },
+    {
+      "code": "50",
+      "value": "Credit Card"
+    },
+    {
+      "code": "58",
+      "value": "Banker's Draft"
+    },
+    {
+      "code": "97",
+      "value": "Other"
+    },
+    {
+      "code": "ZZZ",
+      "value": "Mutually Defined"
+    }
+  ]
+}
+```
+
+**400**
+
+```json
+{
+  "status": false,
+  "code": 400,
+  "message": "Failed to validate invoice",
+  "data": null,
+  "error": {
+    "id": "5c4c008e-8f1e-4034-a96b-8b352c143da5",
+    "handler": "invoice_actions",
+    "details": "this business does not exist",
+    "public_message": "validation failed"
+  },
+  "timestamp": "2025-12-23T14:54:12.477393Z"
+}
+```
+
+**401**
+
+```json
+{
+  "status": false,
+  "code": 401,
+  "message": "Unauthorized",
+  "data": null,
+  "error": {
+    "details": "invalid or missing API credentials"
+  }
+}
+```

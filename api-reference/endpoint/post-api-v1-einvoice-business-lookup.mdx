@@ -1,0 +1,82 @@
+---
+title: "Get Business Information"
+description: "POST /api/v1/einvoice/business/lookup"
+openapi: "POST /api/v1/einvoice/business/lookup"
+---
+
+**POST** `/api/v1/einvoice/business/lookup`
+
+## Request example
+
+```bash
+curl -X POST "{{BASE_URL}}/api/v1/einvoice/business/lookup" \
+  -H "API-KEY: <your_api_key>" \
+  -H "API-SECRET: <your_api_secret>" \
+  -H "Accept: application/json"
+```
+
+Request body:
+
+```json
+{
+  "tin": "32637045-0001"
+}
+```
+
+## Response examples
+
+**200**
+
+```json
+{
+  "code": 200,
+  "data": {
+    "id": "32e4a85e-253c-4baf-83f1-9f5f8822f6a2",
+    "status": "200 OK",
+    "message": "TIN Information",
+    "tin": "32637045-0001",
+    "taxpayer_name": "PASCA TECHNOLOGY LTD",
+    "address": "21, OGO OLUWA STREET BARIGA, SHOMOLU",
+    "taxofficer_id": "87",
+    "taxofficer_name": "MSTO LEKKI",
+    "taxpayer_type": "C",
+    "rc_number": "8151862",
+    "email": "info@pasca.co",
+    "phone": "08168527167",
+    "entity_id": "7ce97abf-959d-4389-ac1d-37d9a965f87c",
+    "app_status": true
+  }
+}
+```
+
+**400**
+
+```json
+{
+  "status": false,
+  "code": 400,
+  "message": "Failed to validate invoice",
+  "data": null,
+  "error": {
+    "id": "5c4c008e-8f1e-4034-a96b-8b352c143da5",
+    "handler": "invoice_actions",
+    "details": "this business does not exist",
+    "public_message": "validation failed"
+  },
+  "timestamp": "2025-12-23T14:54:12.477393Z"
+}
+```
+
+**401**
+
+```json
+{
+  "status": false,
+  "code": 401,
+  "message": "Unauthorized",
+  "data": null,
+  "error": {
+    "details": "invalid or missing API credentials"
+  }
+}
+```

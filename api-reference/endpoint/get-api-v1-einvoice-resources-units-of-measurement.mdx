@@ -1,0 +1,209 @@
+---
+title: "Get All Units of Measurements"
+description: "GET /api/v1/einvoice/resources/units-of-measurement"
+openapi: "GET /api/v1/einvoice/resources/units-of-measurement"
+---
+
+**GET** `/api/v1/einvoice/resources/units-of-measurement`
+
+## Request example
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/resources/units-of-measurement" \
+  -H "API-KEY: <your_api_key>" \
+  -H "API-SECRET: <your_api_secret>" \
+  -H "Accept: application/json"
+```
+
+## Response examples
+
+**200**
+
+```json
+{
+  "status": true,
+  "message": "Units fetched successfully",
+  "data": [
+    {
+      "code": "bag",
+      "name": "Bag"
+    },
+    {
+      "code": "bar",
+      "name": "Bar"
+    },
+    {
+      "code": "bottle",
+      "name": "Bottle"
+    },
+    {
+      "code": "box",
+      "name": "Box"
+    },
+    {
+      "code": "bundle",
+      "name": "Bundle"
+    },
+    {
+      "code": "capsule",
+      "name": "Capsule"
+    },
+    {
+      "code": "carton",
+      "name": "Carton"
+    },
+    {
+      "code": "cm",
+      "name": "Centimeter"
+    },
+    {
+      "code": "crate",
+      "name": "Crate"
+    },
+    {
+      "code": "doz",
+      "name": "Dozen"
+    },
+    {
+      "code": "fl oz",
+      "name": "Fluid Ounce"
+    },
+    {
+      "code": "ft",
+      "name": "Foot"
+    },
+    {
+      "code": "gal",
+      "name": "Gallon"
+    },
+    {
+      "code": "g",
+      "name": "Gram"
+    },
+    {
+      "code": "in",
+      "name": "Inch"
+    },
+    {
+      "code": "kg",
+      "name": "Kilogram"
+    },
+    {
+      "code": "km",
+      "name": "Kilometer"
+    },
+    {
+      "code": "l",
+      "name": "Litre"
+    },
+    {
+      "code": "m",
+      "name": "Meter"
+    },
+    {
+      "code": "mi",
+      "name": "Mile"
+    },
+    {
+      "code": "mg",
+      "name": "Milligram"
+    },
+    {
+      "code": "ml",
+      "name": "Millilitre"
+    },
+    {
+      "code": "mm",
+      "name": "Millimeter"
+    },
+    {
+      "code": "oz",
+      "name": "Ounce"
+    },
+    {
+      "code": "pkt",
+      "name": "Packet"
+    },
+    {
+      "code": "pair",
+      "name": "Pair"
+    },
+    {
+      "code": "pcs",
+      "name": "Pieces"
+    },
+    {
+      "code": "pt",
+      "name": "Pint"
+    },
+    {
+      "code": "lb",
+      "name": "Pound"
+    },
+    {
+      "code": "qt",
+      "name": "Quart"
+    },
+    {
+      "code": "roll",
+      "name": "Roll"
+    },
+    {
+      "code": "sachet",
+      "name": "Sachet"
+    },
+    {
+      "code": "set",
+      "name": "Set"
+    },
+    {
+      "code": "sheet",
+      "name": "Sheet"
+    },
+    {
+      "code": "tablet",
+      "name": "Tablet"
+    },
+    {
+      "code": "t",
+      "name": "Ton"
+    },
+    {
+      "code": "yd",
+      "name": "Yard"
+    }
+  ]
+}
+```
+
+**400**
+
+```json
+{
+  "status": false,
+  "code": 400,
+  "message": "Failed to validate invoice",
+  "data": null,
+  "error": {
+    "id": "5c4c008e-8f1e-4034-a96b-8b352c143da5",
+    "handler": "invoice_actions",
+    "details": "this business does not exist",
+    "public_message": "validation failed"
+  },
+  "timestamp": "2025-12-23T14:54:12.477393Z"
+}
+```
+
+**401**
+
+```json
+{
+  "status": false,
+  "code": 401,
+  "message": "Unauthorized",
+  "data": null,
+  "error": {
+    "details": "invalid or missing API credentials"
+  }
+}
+```

@@ -1,0 +1,47 @@
+---
+title: "All endpoints"
+description: "Complete PASCA API endpoint index"
+---
+
+This page lists every PASCA API endpoint grouped by module. Use it as a quick index and jump into the interactive reference for full testing.
+
+## Resources
+
+- `GET` `/api/v1/einvoice/resources/currencies` — Get Currencies
+- `GET` `/api/v1/einvoice/resources/invoices-types` — Get Invoice Types
+- `GET` `/api/v1/einvoice/resources/lgas` — Get All Local Governments
+- `GET` `/api/v1/einvoice/resources/payment-means` — Get Payment Means
+- `GET` `/api/v1/einvoice/resources/products` — Get All Products
+- `GET` `/api/v1/einvoice/resources/services` — Get All Services
+- `GET` `/api/v1/einvoice/resources/states` — Get All States
+- `GET` `/api/v1/einvoice/resources/tax-categories` — Get Tax Categories
+- `GET` `/api/v1/einvoice/resources/units-of-measurement` — Get All Units of Measurements
+
+## IRN and QR
+
+- `POST` `/api/v1/einvoice/irn/validate` — Validate IRN
+- `POST` `/api/v1/einvoice/qr-code/create` — Create QR Code
+- `POST` `/api/v1/einvoice/qr-code/validate` — Validate QR Code
+
+## Invoices
+
+- `GET` `` — Health Check
+- `POST` `/api/v1/einvoice/report-fiscalization` — Report E-Invoice
+- `POST` `/api/v1/einvoice/sign` — Sign Invoice
+- `POST` `/api/v1/einvoice/validate` — Validate Invoice Schema
+
+## Transmission
+
+- `POST` `/api/v1/einvoice/sign-transmit` — Sign and Transmit Invoice
+- `GET` `/api/v1/einvoice/transmit/{IRN}` — Transmit Invoice
+
+## Status and retrieval
+
+- `GET` `/api/v1/einvoice/lookup/{IRN}` — Lookup IRN (Get APP Status)
+- `PATCH` `/api/v1/einvoice/update/{IRN}` — Update Invoice
+- `GET` `/api/v1/einvoice/{IRN}` — Get Each Invoice (Advanced)
+- `GET` `/api/v1/einvoice/{IRN}/simple` — Get Each Invoice (Basic)
+
+## Business
+
+- `POST` `/api/v1/einvoice/business/lookup` — Get Business Information

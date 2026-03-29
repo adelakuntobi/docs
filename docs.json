@@ -7,7 +7,24 @@
     "light": "#0061FE",
     "dark": "#0061FE"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/logo/light.svg",
+  "api": {
+    "openapi": "/api-reference/openapi.json",
+    "playground": {
+      "display": "interactive",
+      "proxy": true
+    },
+    "url": "full",
+    "examples": {
+      "languages": [
+        "curl",
+        "python",
+        "javascript"
+      ],
+      "defaults": "required",
+      "prefill": true
+    }
+  },
   "navigation": {
     "tabs": [
       {
@@ -47,25 +64,97 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Reference",
+        "groups": [
+          {
+            "group": "API reference",
+            "pages": [
+              "api-reference/introduction",
+              "api-reference/all-endpoints"
+            ]
+          },
+          {
+            "group": "All endpoints",
+            "openapi": "/api-reference/openapi.json"
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "api-reference/endpoint/get-api-v1-einvoice-resources-currencies",
+              "api-reference/endpoint/get-api-v1-einvoice-resources-invoices-types",
+              "api-reference/endpoint/get-api-v1-einvoice-resources-lgas",
+              "api-reference/endpoint/get-api-v1-einvoice-resources-payment-means",
+              "api-reference/endpoint/get-api-v1-einvoice-resources-products",
+              "api-reference/endpoint/get-api-v1-einvoice-resources-services",
+              "api-reference/endpoint/get-api-v1-einvoice-resources-states",
+              "api-reference/endpoint/get-api-v1-einvoice-resources-tax-categories",
+              "api-reference/endpoint/get-api-v1-einvoice-resources-units-of-measurement"
+            ]
+          },
+          {
+            "group": "IRN and QR",
+            "pages": [
+              "api-reference/endpoint/post-api-v1-einvoice-irn-validate",
+              "api-reference/endpoint/post-api-v1-einvoice-qr-code-create",
+              "api-reference/endpoint/post-api-v1-einvoice-qr-code-validate"
+            ]
+          },
+          {
+            "group": "Invoices",
+            "pages": [
+              "api-reference/endpoint/get",
+              "api-reference/endpoint/post-api-v1-einvoice-report-fiscalization",
+              "api-reference/endpoint/post-api-v1-einvoice-sign",
+              "api-reference/endpoint/post-api-v1-einvoice-validate"
+            ]
+          },
+          {
+            "group": "Transmission",
+            "pages": [
+              "api-reference/endpoint/get-api-v1-einvoice-transmit-IRN",
+              "api-reference/endpoint/post-api-v1-einvoice-sign-transmit"
+            ]
+          },
+          {
+            "group": "Status and retrieval",
+            "pages": [
+              "api-reference/endpoint/get-api-v1-einvoice-IRN",
+              "api-reference/endpoint/get-api-v1-einvoice-IRN-simple",
+              "api-reference/endpoint/get-api-v1-einvoice-lookup-IRN",
+              "api-reference/endpoint/patch-api-v1-einvoice-update-IRN"
+            ]
+          },
+          {
+            "group": "Business",
+            "pages": [
+              "api-reference/endpoint/post-api-v1-einvoice-business-lookup"
+            ]
+          }
+        ]
       }
     ]
   },
   "logo": {
-    "light": "/logo/logo.svg",
+    "light": "/logo/light.svg",
     "dark": "/logo/dark.svg",
     "href": "https://pasca.co"
   },
+  "stylesheets": [
+    "/custom.css"
+  ],
   "navbar": {},
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   }
 }

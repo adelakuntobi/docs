@@ -1,33 +1,15 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "API reference"
+description: "Interactive reference for all PASCA endpoints"
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+This reference tab contains every PASCA API endpoint with an interactive playground for testing requests. Use the server selector to switch between production and sandbox, paste your own API credentials into the auth fields, and review the built-in 200, 400, and 401 responses for each endpoint.
 
-## Welcome
+## Base URLs
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+- Production: `https://api.pasca.co`
+- Sandbox: `https://test-api.pasca.co`
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+## Postman collection
 
-## Authentication
-
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```
+Prefer Postman? Use the published collection here: [PASCA API collection](https://documenter.getpostman.com/view/41657148/2sB2qXm3gP).

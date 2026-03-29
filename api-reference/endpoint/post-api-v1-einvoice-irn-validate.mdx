@@ -1,0 +1,68 @@
+---
+title: "Validate IRN"
+description: "POST /api/v1/einvoice/irn/validate"
+openapi: "POST /api/v1/einvoice/irn/validate"
+---
+
+**POST** `/api/v1/einvoice/irn/validate`
+
+## Request example
+
+```bash
+curl -X POST "{{BASE_URL}}/api/v1/einvoice/irn/validate" \
+  -H "API-KEY: <your_api_key>" \
+  -H "API-SECRET: <your_api_secret>" \
+  -H "Accept: application/json"
+```
+
+Request body:
+
+```json
+{
+  "irn": "TEST001-6244CC45-20250629",
+  "business_id": "{{YOUR_BUSINESS_ID}}"
+}
+```
+
+## Response examples
+
+**200**
+
+```json
+{
+  "code": 200,
+  "data": {
+    "ok": true
+  }
+}
+```
+
+**400**
+
+```json
+{
+  "code": 400,
+  "data": null,
+  "message": "error has occurred",
+  "error": {
+    "id": "fe9db3ab-8efa-4ddd-b7a5-47dc2a4e151a",
+    "handler": "invoice_actions",
+    "details": "irn validation failed for this business, refer to the template and try again",
+    "public_message": "validation failed: we are unable to process your request. also confirm this is not a duplicate request"
+  }
+}
+```
+
+**401**
+
+```json
+{
+  "status": false,
+  "code": 401,
+  "message": "Unauthorized",
+  "data": null,
+  "error": {
+    "details": "invalid or missing API credentials"
+  }
+}
+```

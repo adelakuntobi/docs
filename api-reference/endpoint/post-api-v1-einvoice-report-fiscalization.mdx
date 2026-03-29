@@ -1,31 +1,44 @@
 ---
-title: "Health Check"
-description: "GET "
-openapi: "GET "
+title: "Report E-Invoice"
+description: "POST /api/v1/einvoice/report-fiscalization"
+openapi: "POST /api/v1/einvoice/report-fiscalization"
 ---
 
-**GET** ``
+**POST** `/api/v1/einvoice/report-fiscalization`
 
 ## Request example
 
 ```bash
-curl -X GET "{{BASE_URL}}" \
+curl -X POST "{{BASE_URL}}/api/v1/einvoice/report-fiscalization" \
   -H "API-KEY: <your_api_key>" \
   -H "API-SECRET: <your_api_secret>" \
   -H "Accept: application/json"
+```
+
+Request body:
+
+```json
+{
+  "agent_tin": "29039239-0001",
+  "base_amount": "1000",
+  "beneficiary_tin": "29334238-0001",
+  "currency": "NGN",
+  "item_description": "Items",
+  "irn": "{{IRN}}",
+  "other_taxes": "5000",
+  "total_amount": "112500",
+  "transaction_date": "2024-11-18",
+  "vat_calculated": "7500",
+  "vat_rate": "7.5",
+  "vat_status": "STANDARD_VAT"
+}
 ```
 
 ## Response examples
 
 **200**
 
-```json
-{
-  "code": 200,
-  "data": null,
-  "message": "API is healthy"
-}
-```
+No example provided for this response.
 
 **400**
 

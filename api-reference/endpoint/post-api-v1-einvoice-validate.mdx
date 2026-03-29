@@ -1,0 +1,215 @@
+---
+title: "Validate Invoice Schema"
+description: "POST /api/v1/einvoice/validate"
+openapi: "POST /api/v1/einvoice/validate"
+---
+
+**POST** `/api/v1/einvoice/validate`
+
+## Request example
+
+```bash
+curl -X POST "{{BASE_URL}}/api/v1/einvoice/validate" \
+  -H "API-KEY: <your_api_key>" \
+  -H "API-SECRET: <your_api_secret>" \
+  -H "Accept: application/json"
+```
+
+Request body:
+
+```json
+{
+  "business_id": "{{BUSINESS_ID}}",
+  "irn": "{{IRN}}",
+  "issue_date": "2024-05-14",
+  "due_date": "2024-06-14",
+  "issue_time": "17:59:04",
+  "invoice_type_code": "381",
+  "invoice_kind": "B2B",
+  "payment_status": "PENDING",
+  "note": "dummy_note (will be encryted in storage)",
+  "tax_point_date": "2024-05-14",
+  "document_currency_code": "NGN",
+  "tax_currency_code": "NGN",
+  "accounting_cost": "2000 NGN",
+  "buyer_reference": "buyer REF IRN?",
+  "invoice_delivery_period": {
+    "start_date": "2024-06-14",
+    "end_date": "2024-06-16"
+  },
+  "order_reference": "order REF IRN?",
+  "billing_reference": [
+    {
+      "issue_date": "2024-05-14"
+    },
+    {
+      "irn": "ITW001-E9E0C0D3-20240619",
+      "issue_date": "2024-05-14"
+    }
+  ],
+  "dispatch_document_reference": {
+    "irn": "ITW001-E9E0C0D3-20240619",
+    "issue_date": "2024-05-14"
+  },
+  "receipt_document_reference": {
+    "irn": "ITW001-E9E0C0D3-20240619",
+    "issue_date": "2024-05-14"
+  },
+  "originator_document_reference": {
+    "irn": "ITW001-E9E0C0D3-20240619",
+    "issue_date": "2024-05-14"
+  },
+  "contract_document_reference": {
+    "irn": "ITW001-E9E0C0D3-20240619",
+    "issue_date": "2024-05-14"
+  },
+  "_document_reference": [
+    {
+      "irn": "ITW001-E9E0C0D3-20240619",
+      "issue_date": "2024-05-14"
+    }
+  ],
+  "accounting_supplier_party": {
+    "party_name": "TITAN BRIDGE DYNAMIC WORLD LTD",
+    "tin": "24058123-0002",
+    "email": "test_sender@pasca.co",
+    "telephone": "+23480254099000",
+    "business_description": "Test with samuel is the name of my business",
+    "postal_address": {
+      "street_name": "32, owonikoko street",
+      "city_name": "Gwarikpa",
+      "postal_zone": "023401",
+      "lga": "NG-AB-ANO",
+      "state": "NG-AB",
+      "country": "NG"
+    }
+  },
+  "actual_delivery_date": "2024-05-14",
+  "payment_means": [
+    {
+      "payment_means_code": "10",
+      "payment_due_date": "2024-05-14"
+    },
+    {
+      "payment_means_code": "43",
+      "payment_due_date": "2024-05-14"
+    }
+  ],
+  "payment_terms_note": "dummy payment terms note (will be encryted in storage)",
+  "allowance_charge": [
+    {
+      "charge_indicator": true,
+      "amount": 800.6
+    },
+    {
+      "charge_indicator": false,
+      "amount": 10
+    }
+  ],
+  "tax_total": [
+    {
+      "tax_amount": 56.07,
+      "tax_subtotal": [
+        {
+          "taxable_amount": 800,
+          "tax_amount": 8,
+          "tax_category": {
+            "id": "LOCAL_SALES_TAX",
+            "percent": 2.3
+          }
+        }
+      ]
+    }
+  ],
+  "legal_monetary_total": {
+    "line_extension_amount": 10,
+    "tax_exclusive_amount": 10,
+    "tax_inclusive_amount": 10,
+    "payable_amount": 10
+  },
+  "invoice_line": [
+    {
+      "hsn_code": "CC-111",
+      "product_category": "Food and Beverages",
+      "discount_rate": 2.01,
+      "discount_amount": 3500,
+      "fee_rate": 1.01,
+      "fee_amount": 50,
+      "invoiced_quantity": 15,
+      "line_extension_amount": 30,
+      "item": {
+        "name": "Tomato Paste",
+        "description": "Description of the tomato paste",
+        "sellers_item_identification": "identified as spoon by the seller"
+      },
+      "price": {
+        "price_amount": 1150,
+        "base_quantity": 1,
+        "price_unit": "NGN per 1"
+      }
+    },
+    {
+      "isic_code": "1212",
+      "service_category": "Food and Beverages",
+      "discount_rate": 2.01,
+      "discount_amount": 3500,
+      "fee_rate": 1.01,
+      "fee_amount": 50,
+      "invoiced_quantity": 15,
+      "line_extension_amount": 30,
+      "item": {
+        "name": "Milo and milk",
+        "description": "This is a beverage category",
+        "sellers_item_identification": "identified as shovel by the seller"
+      },
+      "price": {
+        "price_amount": 9012,
+        "base_quantity": 1,
+        "price_unit": "NGN per 1"
+      }
+    }
+  ]
+}
+```
+
+## Response examples
+
+**200**
+
+```json
+{
+  "status": true,
+  "code": 200,
+  "message": "Invoice validated sucessfully",
+  "data": []
+}
+```
+
+**400**
+
+```json
+{
+  "status": false,
+  "code": 400,
+  "message": "The business id field is required.",
+  "data": null,
+  "error": [
+    "The business id field is required."
+  ],
+  "timestamp": "2025-12-23T14:54:12.477393Z"
+}
+```
+
+**401**
+
+```json
+{
+  "status": false,
+  "code": 401,
+  "message": "Unauthorized",
+  "data": null,
+  "error": {
+    "details": "invalid or missing API credentials"
+  }
+}
+```

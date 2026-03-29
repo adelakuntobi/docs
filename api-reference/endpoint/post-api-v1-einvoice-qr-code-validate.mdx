@@ -1,31 +1,33 @@
 ---
-title: "Health Check"
-description: "GET "
-openapi: "GET "
+title: "Validate QR Code"
+description: "POST /api/v1/einvoice/qr-code/validate"
+openapi: "POST /api/v1/einvoice/qr-code/validate"
 ---
 
-**GET** ``
+**POST** `/api/v1/einvoice/qr-code/validate`
 
 ## Request example
 
 ```bash
-curl -X GET "{{BASE_URL}}" \
+curl -X POST "{{BASE_URL}}/api/v1/einvoice/qr-code/validate" \
   -H "API-KEY: <your_api_key>" \
   -H "API-SECRET: <your_api_secret>" \
   -H "Accept: application/json"
+```
+
+Request body:
+
+```json
+{
+  "code": "...."
+}
 ```
 
 ## Response examples
 
 **200**
 
-```json
-{
-  "code": 200,
-  "data": null,
-  "message": "API is healthy"
-}
-```
+No example provided for this response.
 
 **400**
 

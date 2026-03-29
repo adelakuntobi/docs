@@ -1,0 +1,180 @@
+---
+title: "Get Tax Categories"
+description: "GET /api/v1/einvoice/resources/tax-categories"
+openapi: "GET /api/v1/einvoice/resources/tax-categories"
+---
+
+**GET** `/api/v1/einvoice/resources/tax-categories`
+
+## Request example
+
+```bash
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/resources/tax-categories" \
+  -H "API-KEY: <your_api_key>" \
+  -H "API-SECRET: <your_api_secret>" \
+  -H "Accept: application/json"
+```
+
+## Response examples
+
+**200**
+
+```json
+{
+  "code": 200,
+  "data": [
+    {
+      "code": "STANDARD_GST",
+      "value": "Standard Goods and Services Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "REDUCED_GST",
+      "value": "Reduced Goods and Services Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "ZERO_GST",
+      "value": "Zero Goods and Services Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "STANDARD_VAT",
+      "value": "Standard Value-Added Tax",
+      "percent": "7.5"
+    },
+    {
+      "code": "REDUCED_VAT",
+      "value": "Reduced Value-Added Tax",
+      "percent": "7.5"
+    },
+    {
+      "code": "ZERO_VAT",
+      "value": "Zero Value-Added Tax",
+      "percent": "0.0"
+    },
+    {
+      "code": "STATE_SALES_TAX",
+      "value": "State Sales Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "LOCAL_SALES_TAX",
+      "value": "Local Sales Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "ALCOHOL_EXCISE_TAX",
+      "value": "Alcohol Excise Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "TOBACCO_EXCISE_TAX",
+      "value": "Tobacco Excise Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "FUEL_EXCISE_TAX",
+      "value": "Fuel Excise Tax",
+      "percent": ""
+    },
+    {
+      "code": "CORPORATE_INCOME_TAX",
+      "value": "Corporate Income Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "PERSONAL_INCOME_TAX",
+      "value": "Personal Income Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "SOCIAL_SECURITY_TAX",
+      "value": "Social Security Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "MEDICARE_TAX",
+      "value": "Medicare Tax",
+      "percent": ""
+    },
+    {
+      "code": "REAL_ESTATE_TAX",
+      "value": "Real Estate Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "PERSONAL_PROPERTY_TAX",
+      "value": "Personal Property Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "CARBON_TAX",
+      "value": "Carbon Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "PLASTIC_TAX",
+      "value": "Plastic Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "IMPORT_DUTY",
+      "value": "Import Duty",
+      "percent": "Not Available"
+    },
+    {
+      "code": "EXPORT_DUTY",
+      "value": "Export Duty",
+      "percent": "Not Available"
+    },
+    {
+      "code": "LUXURY_TAX",
+      "value": "Luxury Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "SERVICE_TAX",
+      "value": "Service Tax",
+      "percent": "Not Available"
+    },
+    {
+      "code": "TOURISM_TAX",
+      "value": "Tourism Tax",
+      "percent": "Not Available"
+    }
+  ]
+}
+```
+
+**400**
+
+```json
+{
+  "status": false,
+  "code": 400,
+  "message": "Failed to validate invoice",
+  "data": null,
+  "error": {
+    "id": "5c4c008e-8f1e-4034-a96b-8b352c143da5",
+    "handler": "invoice_actions",
+    "details": "this business does not exist",
+    "public_message": "validation failed"
+  },
+  "timestamp": "2025-12-23T14:54:12.477393Z"
+}
+```
+
+**401**
+
+```json
+{
+  "status": false,
+  "code": 401,
+  "message": "Unauthorized",
+  "data": null,
+  "error": {
+    "details": "invalid or missing API credentials"
+  }
+}
+```

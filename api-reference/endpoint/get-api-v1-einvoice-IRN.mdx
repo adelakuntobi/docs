@@ -1,15 +1,15 @@
 ---
-title: "Health Check"
-description: "GET "
-openapi: "GET "
+title: "Get Each Invoice (Advanced)"
+description: "GET /api/v1/einvoice/{IRN}"
+openapi: "GET /api/v1/einvoice/{IRN}"
 ---
 
-**GET** ``
+**GET** `/api/v1/einvoice/{IRN}`
 
 ## Request example
 
 ```bash
-curl -X GET "{{BASE_URL}}" \
+curl -X GET "{{BASE_URL}}/api/v1/einvoice/{IRN}" \
   -H "API-KEY: <your_api_key>" \
   -H "API-SECRET: <your_api_secret>" \
   -H "Accept: application/json"
@@ -19,13 +19,7 @@ curl -X GET "{{BASE_URL}}" \
 
 **200**
 
-```json
-{
-  "code": 200,
-  "data": null,
-  "message": "API is healthy"
-}
-```
+No example provided for this response.
 
 **400**
 
